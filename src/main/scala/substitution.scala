@@ -1,9 +1,10 @@
+import scala.util.Random
+
 class Substitute(){
 
-	val letters = "abcdefghijklmnopqrstuvwxyz".toList
-
-	def execute(cipher: String): Unit = {
-        val cipher_list = cipher.toList
-        println(cipher_list)
-	}
+    def execute(cipher: String) = {
+        val cipher_list = cipher.toList.distinct
+        var letters = for (i <- 1 to cipher.length) yield Random.alphanumeric.filter(_.isLetter).head.toString.toLowerCase
+        println(letters)
+    }
 }

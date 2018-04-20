@@ -1,6 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/scottypate/Dropbox/equatorial/src/main/scala/substitution.scala:6:16: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
-[0m[[0m[31merror[0m] [0m[0m required: String[0m
-[0m[[0m[31merror[0m] [0m[0m        println(letters)[0m
-[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/scottypate/Dropbox/equatorial/src/main/scala/substitution.scala:7:103: value toLowerCase is not a member of Char[0m
+[0m[[0m[31merror[0m] [0m[0m        var letters = for (i <- 1 to cipher.length) yield Random.alphanumeric.filter(_.isLetter).head.toLowerCase[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                      ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
