@@ -15,5 +15,8 @@ object Main {
 
         val substitute = new Substitute()
         val solution = substitute.execute(cipher340)
+
+        val fitness = new Fitness()
+        val fitness_score = fitness.execute(solution)
     }
 }
