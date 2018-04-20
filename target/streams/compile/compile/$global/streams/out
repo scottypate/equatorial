@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/scottypate/Dropbox/equatorial/src/main/scala/substitution.scala:12:17: reassignment to val[0m
-[0m[[0m[31merror[0m] [0m[0m        	cipher = cipher.replace(k, v.charAt(0))[0m
-[0m[[0m[31merror[0m] [0m[0m        	       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/scottypate/Dropbox/equatorial/src/main/scala/fitness_eval.scala:15:20: value :+ is not a member of Int[0m
+[0m[[0m[31merror[0m] [0m[0m             count :+ 1[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
