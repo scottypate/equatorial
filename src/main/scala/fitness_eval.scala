@@ -1,10 +1,10 @@
 class Fitness(){
 
-	val commonBigrams = Array[String](
+  val commonBigrams = Array[String](
     "TH", "HE", "IN", "ER", "AN", "RE", "ON", "AT", "EN", "ND",
     "TI", "ES", "OR", "TE", "OF", "ED", "IS", "IT", "AL", "AR", 
     "ST", "NT", "TO"
-	)
+  )
 
   var letterFrequencies = Map(
     "a" -> 0.08167,
@@ -35,9 +35,9 @@ class Fitness(){
     "z" -> 0.00074
   )
 
-	def countBigrams(solution: String) = {
+  def countBigrams(solution: String) = {
 
-		var count = 0
+    var count = 0
         for (v <- commonBigrams) {
            val ind = solution contains v
            if (ind) {
@@ -46,7 +46,7 @@ class Fitness(){
            }
         }
         count
-	}
+  }
 
   def letterFrequencyScore(solution: String) = {
     var sum: Integer = solution.size
