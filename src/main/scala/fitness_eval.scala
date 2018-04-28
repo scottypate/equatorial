@@ -3,7 +3,14 @@ class Fitness(){
   val commonBigrams = Array[String](
     "TH", "HE", "IN", "ER", "AN", "RE", "ON", "AT", "EN", "ND",
     "TI", "ES", "OR", "TE", "OF", "ED", "IS", "IT", "AL", "AR", 
-    "ST", "NT", "TO"
+    "ST", "NT", "TO", "LL", "IL", "OU", "EA", "HI", "AS", "TE"
+  )
+
+  val commonTrigrams = Array[String](
+    "THE", "ERE", "HES", "AND", "TIO", "VER", "ING", "TER", "HIS",
+    "ENT", "EST", "OFT", "ION", "ERS", "ITH", "HER", "ATI", "FTH",
+    "FOR", "HAT", "STH", "THA", "ATE", "OTH", "NTH", "ALL", "RES",
+    "INT", "ETH", "ONT"
   )
 
   var letterFrequencies = Map(
@@ -45,7 +52,20 @@ class Fitness(){
              println(ind)
            }
         }
-        count
+        count.toFloat / (solution.length - 2)
+  }
+
+  def countTrigrams(solution: String) = {
+
+    var count = 0
+        for (v <- commonTrigrams) {
+           val ind = solution contains v
+           if (ind) {
+             count += 1
+             println(ind)
+           }
+        }
+        count.toFloat / (solution.length - 3)
   }
 
   def letterFrequencyScore(solution: String) = {
@@ -64,10 +84,16 @@ class Fitness(){
     score
   }
 
-  def execute(solution: String) = {
+  def execute(cipher: String, letterMap: Map[Char, String]) = {
+    var solution = cipher
+
+    for ((k,v) <- letterMap){
+      solution = solution.replace(k, v.charAt(0))
+    }
 
     val nBigrams = countBigrams(solution)
+    val nTrigrams = countBigrams(solution)
     val frequencyScore = letterFrequencyScore(solution)
-    frequencyScore
+    frequencyScore + nBigrams + nTrigrams
   }
 }
