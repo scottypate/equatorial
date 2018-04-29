@@ -2,6 +2,15 @@ import scala.util.Random
 
 class Crossover(){
 
+	def get_parent(population: scala.collection.mutable.Map[Map[Char, String], Double]) = {
+
+	  val random = new Random();
+    val keys = population.keySet
+    val parent = keys.toVector(random.nextInt(keys.size))
+    
+    parent
+	}
+
 	def crossover(parentA: String, parentB: String) = {
 
   }
@@ -11,12 +20,7 @@ class Crossover(){
   }
 
 	def execute(population: scala.collection.mutable.Map[Map[Char, String], Double]) = {
-
-		println(Random.nextInt(population.size))
-    // val parentA = population(Random.nextInt())
-    // val parentB = population(Random.nextInt())
-
-    // println(parentA)
-    // println(parentB)
+    val parentA = get_parent(population)
+    val parentB = get_parent(population)
 	}
 }
