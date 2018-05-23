@@ -1,6 +1,7 @@
 object Main {
     
   def main(args: Array[String]) {
+
     val getter = new Getter()
     val substitute = new Substitute()
     val fitness = new Fitness()
@@ -25,6 +26,6 @@ object Main {
 
     }
 
-    val child = crossover.execute(population)
+    val child = crossover.execute(cipher340, population)
   }
 }
