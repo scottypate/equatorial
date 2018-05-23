@@ -45,27 +45,27 @@ class Fitness(){
   def countBigrams(solution: String) = {
 
     var count = 0
-        for (v <- commonBigrams) {
-           val ind = solution contains v
-           if (ind) {
-             count += 1
-             println(ind)
-           }
-        }
-        count.toFloat / (solution.length - 2)
+    for (v <- commonBigrams) {
+       val ind = solution contains v
+       if (ind) {
+         count += 1
+         println(ind)
+       }
+    }
+    count.toFloat / (solution.length - 2)
   }
 
   def countTrigrams(solution: String) = {
 
     var count = 0
-        for (v <- commonTrigrams) {
-           val ind = solution contains v
-           if (ind) {
-             count += 1
-             println(ind)
-           }
-        }
-        count.toFloat / (solution.length - 3)
+    for (v <- commonTrigrams) {
+      val ind = solution contains v
+      if (ind) {
+        count += 1
+        println(ind)
+      }
+    }
+    count.toFloat / (solution.length - 3)
   }
 
   def letterFrequencyScore(solution: String) = {

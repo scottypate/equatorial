@@ -47,6 +47,6 @@ class Crossover(){
     val childSolution = crossover(parentA, parentB, cipher)
     val mutatedSolution = mutate(childSolution, 0.05)
 
-    mutatedSolution
+    mutatedSolution.toMap
   }
 }
