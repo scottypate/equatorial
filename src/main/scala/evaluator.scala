@@ -1,4 +1,4 @@
-class Fitness(){
+class Evaluator(){
 
   val commonBigrams = Array[String](
     "TH", "HE", "IN", "ER", "AN", "RE", "ON", "AT", "EN", "ND",

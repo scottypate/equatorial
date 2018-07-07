@@ -1,4 +1,4 @@
-import scala.collection.immutable.ListMap
+import scala.collection.mutable.ListMap
 
 class Blender() {
 
@@ -11,7 +11,7 @@ class Blender() {
 
     val parentSize = orderedParents.size
 
-    val blendedGeneration = orderedParents.take(parentSize / 2) ++ orderedOffspring.take(parentSize / 2)
+    var blendedGeneration = orderedParents.take(parentSize / 2) ++ orderedOffspring.take(parentSize / 2)
     blendedGeneration
   }
 }
