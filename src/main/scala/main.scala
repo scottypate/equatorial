@@ -23,11 +23,13 @@ object Main {
       n_population = 10000
     )
 
-    val evolved_population = evolver.execute(
+    val best_solution = evolver.execute(
       initial_population = initial_population,
       n_generations = 100, 
       n_children = initial_population.size,
       cipher = cipher340
     )
+    println("The best solution found for this iteration is:")
+    println(best_solution)
   }
 }

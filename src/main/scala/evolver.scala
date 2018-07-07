@@ -26,5 +26,6 @@ class Evolver() {
       generation = blender.execute(generation, offspring)
       println("The highest score for generation " + i + " is: " + generation.valuesIterator.max )
     }
+    generation.maxBy(_._2)
   }
 }
