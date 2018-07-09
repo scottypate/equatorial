@@ -10,7 +10,7 @@ class Initializer() {
     val initial_population = scala.collection.mutable.Map[Map[Char, String], Double]()
 
     // Create the initial parent population
-    for (i <- 1 to 10000) {
+    for (i <- 1 to n_population) {
       val letterMap = substitute.execute(cipher)
       val fitness_score = evaluator.execute(cipher, letterMap)
       initial_population += (letterMap -> fitness_score)

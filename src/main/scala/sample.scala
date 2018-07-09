@@ -1,6 +1,6 @@
 import scala.util.Random
 
-class Sample(){
+class Sampler(){
 
   val random = new Random()
 

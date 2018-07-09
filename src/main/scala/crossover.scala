@@ -4,11 +4,9 @@ import scala.collection.mutable.ListBuffer
 class Crossover(){
 
   val random = new Random()
-  val sample = new Sample()
 
   // Select a weighted sample from the population for a parent based on the fitness score of the solution
   def get_parent(population: scala.collection.mutable.Map[Map[Char, String], Double]) = {
-    println(sample.execute(population))
     val keys = population.keySet
     val parent = keys.toVector(random.nextInt(keys.size))
     
