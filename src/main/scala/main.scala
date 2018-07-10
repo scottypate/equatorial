@@ -7,6 +7,7 @@ object Main {
     val getter = new Getter()
     val intializer = new Initializer()
     val evolver = new Evolver()
+    val evaluator = new Evaluator()
 
     val cipher408 = getter.execute(
       appDir = System.getProperty("user.dir"),
@@ -18,14 +19,22 @@ object Main {
       filename = "zodiac_340.txt"
     )
 
+    val cipher408Solution = getter.execute(
+      appDir = System.getProperty("user.dir"),
+      filename = "zodiac_408_solution.txt"
+    )
+    
+    val cipher408fitness = evaluator.score_solution(cipher408Solution)
+    println("The fitness score for the 408 solution is: " + cipher408fitness)
+
     val initial_population = intializer.execute(
       cipher = cipher340,
-      n_population = 100000
+      n_population = 10000
     )
 
     val best_solution = evolver.execute(
       initial_population = initial_population,
-      n_generations = 1000, 
+      n_generations = 15, 
       n_children = initial_population.size,
       cipher = cipher340
     )

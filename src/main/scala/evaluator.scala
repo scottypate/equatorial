@@ -1,16 +1,17 @@
 class Evaluator(){
 
   val commonBigrams = Array[String](
-    "TH", "HE", "IN", "ER", "AN", "RE", "ON", "AT", "EN", "ND",
-    "TI", "ES", "OR", "TE", "OF", "ED", "IS", "IT", "AL", "AR", 
-    "ST", "NT", "TO", "LL", "IL", "OU", "EA", "HI", "AS", "TE"
+    "th", "he", "in", "er", "an", "re", "on", "at", "en", "nd",
+    "ti", "es", "or", "te", "of", "ed", "is", "it", "al", "ar", 
+    "st", "nt", "to", "ll", "il", "ou", "ea", "hi", "as", "te",
+    "my", "in", "of", "be", "ha", "et", "ng"
   )
 
   val commonTrigrams = Array[String](
-    "THE", "ERE", "HES", "AND", "TIO", "VER", "ING", "TER", "HIS",
-    "ENT", "EST", "OFT", "ION", "ERS", "ITH", "HER", "ATI", "FTH",
-    "FOR", "HAT", "STH", "THA", "ATE", "OTH", "NTH", "ALL", "RES",
-    "INT", "ETH", "ONT"
+    "the", "ere", "hes", "and", "tio", "ver", "ing", "ter", "his",
+    "ent", "est", "oft", "ion", "ers", "ith", "her", "ati", "fth",
+    "for", "hat", "sth", "tha", "ate", "oth", "nth", "all", "res",
+    "int", "eth", "ont", "ill", "you", "fun", "iti", "ebe",  "tha"
   )
 
   var letterFrequencies = Map(
@@ -49,10 +50,9 @@ class Evaluator(){
        val ind = solution contains v
        if (ind) {
          count += 1
-         println(ind)
        }
     }
-    count.toFloat / (solution.length - 2)
+    count
   }
 
   def countTrigrams(solution: String) = {
@@ -62,10 +62,9 @@ class Evaluator(){
       val ind = solution contains v
       if (ind) {
         count += 1
-        println(ind)
       }
     }
-    count.toFloat / (solution.length - 3)
+    count
   }
 
   def letterFrequencyScore(solution: String) = {
@@ -84,6 +83,13 @@ class Evaluator(){
     score
   }
 
+  def score_solution(solution: String) = {
+    val nBigrams = countBigrams(solution)
+    val nTrigrams = countBigrams(solution)
+    val frequencyScore = letterFrequencyScore(solution)
+    frequencyScore + nBigrams + nTrigrams
+  }
+
   def execute(cipher: String, letterMap: Map[Char, String]) = {
     var solution = cipher
 
@@ -94,6 +100,6 @@ class Evaluator(){
     val nBigrams = countBigrams(solution)
     val nTrigrams = countBigrams(solution)
     val frequencyScore = letterFrequencyScore(solution)
-    frequencyScore + nBigrams + nTrigrams
+    score_solution(solution)
   }
 }
