@@ -12,7 +12,8 @@ class Crossover(){
     
     parent
   }
-
+  
+  // Produce a new possible solution by blending two parents together. 
   def crossover(parentA: Map[Char, String], parentB: Map[Char, String], cipher: String) = {
     val cipherList = cipher.toList.distinct
     var partialSolution = scala.collection.mutable.Map[Char, String]()
@@ -30,6 +31,7 @@ class Crossover(){
     partialSolution
   }
 
+  // Create a random mutation in one of the children at a given probability
   def mutate(childSolution: scala.collection.mutable.Map[Char, String], mutationProbability: Double) = {    
     for (letter <- childSolution){
       val randomDouble = random.nextDouble()
@@ -40,7 +42,6 @@ class Crossover(){
     }
     childSolution
   }
-
   def execute(cipher: String, population: scala.collection.mutable.Map[Map[Char, String], Double]) = {
     val parentA = get_parent(population)
     val parentB = get_parent(population)

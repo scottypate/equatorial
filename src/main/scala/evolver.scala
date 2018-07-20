@@ -16,6 +16,7 @@ class Evolver() {
     for (i <- 1 to n_generations) {
       // Create offspring from the initial population
       val offspring = scala.collection.mutable.Map[Map[Char, String], Double]()
+      // Get CDF of fitness values from the current population
       val sampleWeights = sampler.execute(generation)
       
       for (i <- 1 to n_children) {
@@ -26,6 +27,7 @@ class Evolver() {
       generation = blender.execute(generation, offspring)
       println("The highest score for generation " + i + " is: " + generation.valuesIterator.max )
     }
+    // Return the most fit solution from the evolution process 
     generation.maxBy(_._2)
   }
 }

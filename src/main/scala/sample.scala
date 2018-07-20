@@ -11,7 +11,7 @@ class Sampler(){
 
     var totalWeight: Double = observations.foldLeft(0.0)(_+_._2)
     val scores: List[Double] = observations.values.toList.sorted
-
+    
     for (score <- scores){ 
       runningSum += (score / totalWeight)
       cdf += (score -> runningSum)

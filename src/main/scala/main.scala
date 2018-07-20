@@ -8,6 +8,7 @@ object Main {
     val intializer = new Initializer()
     val evolver = new Evolver()
     val evaluator = new Evaluator()
+    val sampler = new Sampler()
 
     val cipher408 = getter.execute(
       appDir = System.getProperty("user.dir"),
@@ -31,14 +32,17 @@ object Main {
       cipher = cipher340,
       n_population = 10000
     )
+    val cdf = sampler.execute(initial_population)
+    // filter this map to only include those that are above cutoff
+    println(cdf.filter(_,_ > 0.9))
 
-    val best_solution = evolver.execute(
-      initial_population = initial_population,
-      n_generations = 15, 
-      n_children = initial_population.size,
-      cipher = cipher340
-    )
-    println("The best solution found at the end of evolution is:")
-    println(best_solution)
+    // val best_solution = evolver.execute(
+    //   initial_population = initial_population,
+    //   n_generations = 15, 
+    //   n_children = initial_population.size,
+    //   cipher = cipher340
+    // )
+    // println("The best solution found at the end of evolution is:")
+    // println(best_solution)
   }
 }
