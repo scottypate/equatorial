@@ -84,10 +84,8 @@ class Evaluator(){
   }
 
   def score_solution(solution: String) = {
-    val nBigrams = countBigrams(solution)
-    val nTrigrams = countBigrams(solution)
     val frequencyScore = letterFrequencyScore(solution)
-    frequencyScore + nBigrams + nTrigrams
+    frequencyScore
   }
 
   def execute(cipher: String, letterMap: Map[Char, String]) = {
@@ -96,10 +94,6 @@ class Evaluator(){
     for ((k,v) <- letterMap){
       solution = solution.replace(k, v.charAt(0))
     }
-
-    val nBigrams = countBigrams(solution)
-    val nTrigrams = countBigrams(solution)
-    val frequencyScore = letterFrequencyScore(solution)
     score_solution(solution)
   }
 }

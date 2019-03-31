@@ -25,7 +25,7 @@ class Evolver() {
         offspring += (child -> fitness_score)
       }
       generation = blender.execute(generation, offspring)
-      println("The highest score for generation " + i + " is: " + generation.valuesIterator.max )
+      println("The best score for generation " + i + " is: " + generation.valuesIterator.max)
     }
     // Return the most fit solution from the evolution process 
     generation.maxBy(_._2)
