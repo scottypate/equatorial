@@ -1,4 +1,9 @@
+import org.apache.tika.langdetect.OptimaizeLangDetector
+import collection.JavaConverters._
+
 class Evaluator(){
+
+  val language = new OptimaizeLangDetector()
 
   val commonBigrams = Array[String](
     "th", "he", "in", "er", "an", "re", "on", "at", "en", "nd",
@@ -83,9 +88,21 @@ class Evaluator(){
     score
   }
 
+  def languageDetectionScore(solution: String) = {
+    language.loadModels()
+    val languageResult = asScalaBuffer(language.detectAll(solution))
+    var returnScore = 0.0f
+    for (result <- languageResult) {
+      if (result.getLanguage() == "en") {
+        returnScore = result.getRawScore()
+      }
+    }
+    returnScore
+  }
+
   def score_solution(solution: String) = {
-    val frequencyScore = letterFrequencyScore(solution)
-    frequencyScore
+    val score = languageDetectionScore(solution)
+    score
   }
 
   def execute(cipher: String, letterMap: Map[Char, String]) = {
