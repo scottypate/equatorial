@@ -1,10 +1,10 @@
-import org.apache.tika.langdetect.OptimaizeLangDetector
 import collection.JavaConverters._
+import org.apache.tika.langdetect.Lingo24LangDetector
 
+// This class contains various methods for evaluating the solution's fitness
 class Evaluator(){
 
-  val language = new OptimaizeLangDetector()
-
+  // Most common english bigrams
   val commonBigrams = Array[String](
     "th", "he", "in", "er", "an", "re", "on", "at", "en", "nd",
     "ti", "es", "or", "te", "of", "ed", "is", "it", "al", "ar", 
@@ -12,6 +12,7 @@ class Evaluator(){
     "my", "in", "of", "be", "ha", "et", "ng"
   )
 
+  // Most common english trigrams
   val commonTrigrams = Array[String](
     "the", "ere", "hes", "and", "tio", "ver", "ing", "ter", "his",
     "ent", "est", "oft", "ion", "ers", "ith", "her", "ati", "fth",
@@ -19,6 +20,7 @@ class Evaluator(){
     "int", "eth", "ont", "ill", "you", "fun", "iti", "ebe",  "tha"
   )
 
+  // English letter frequency of occurence
   var letterFrequencies = Map(
     "a" -> 0.08167,
     "b" -> 0.01492,
@@ -72,6 +74,7 @@ class Evaluator(){
     count
   }
 
+  // How far does the solution deviate from english letter frequencies
   def letterFrequencyScore(solution: String) = {
     var sum: Integer = solution.size
     var solutionFrequencies = solution.groupBy(identity).mapValues(_.size.toFloat / sum)
@@ -89,6 +92,7 @@ class Evaluator(){
   }
 
   def languageDetectionScore(solution: String) = {
+    val language = new Lingo24LangDetector()
     language.loadModels()
     val languageResult = asScalaBuffer(language.detectAll(solution))
     var returnScore = 0.0f
@@ -97,7 +101,7 @@ class Evaluator(){
         returnScore = result.getRawScore()
       }
     }
-    returnScore
+    println(returnScore)
   }
 
   def score_solution(solution: String) = {

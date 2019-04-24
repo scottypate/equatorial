@@ -3,3 +3,4 @@
 *.env
 target/
 project/
+*langdetect.lingo24.properties

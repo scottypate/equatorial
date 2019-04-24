@@ -30,13 +30,13 @@ object Main {
 
     val initial_population = intializer.execute(
       cipher = cipher340,
-      n_population = 1000
+      n_population = 10
     )
     val cdf = sampler.execute(initial_population)
 
     val best_solution = evolver.execute(
       initial_population = initial_population,
-      n_generations = 10, 
+      n_generations = 1, 
       n_children = initial_population.size,
       cipher = cipher340
     )
