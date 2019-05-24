@@ -1,33 +1,33 @@
 class Evolver() {
 
   def execute(
-    initial_population: scala.collection.mutable.Map[Map[Char, String], Double], 
-    n_generations: Int, 
-    n_children: Int,
-    cipher: String ) = {
+    initialPopulation: scala.collection.mutable.Map[Map[Char, String], Double], 
+    nGenerations: Int, 
+    nChildren: Int,
+    cipher: String,
+    wordBag: Map[String, Int] ) = {
 
     val crossover = new Crossover()
     val evaluator = new Evaluator()
-    val blender = new Blender()
-    val sampler = new Sampler()
+    val utils = new Utils()
 
-    var generation = initial_population
+    var generation = initialPopulation
 
-    for (i <- 1 to n_generations) {
+    for (i <- 1 to nGenerations) {
       // Create offspring from the initial population
       val offspring = scala.collection.mutable.Map[Map[Char, String], Double]()
       // Get CDF of fitness values from the current population
-      val sampleWeights = sampler.execute(generation)
+      val sampleWeights = utils.sample(generation)
       
-      for (i <- 1 to n_children) {
+      for (i <- 1 to nChildren) {
         val child = crossover.execute(cipher, generation)
-        val fitness_score =  evaluator.execute(cipher, child)
-        offspring += (child -> fitness_score)
+        val fitnessScore =  evaluator.execute(cipher, child, wordBag)
+        offspring += (child -> fitnessScore)
       }
-      generation = blender.execute(generation, offspring)
-      println("The best score for generation " + i + " is: " + generation.valuesIterator.max)
+      generation = utils.blendGeneration(generation, offspring)
+      val bestSolution = generation.maxBy(_._2)
+      println("The best score for generation " + i + " is: " + bestSolution._2)
+      println("Solution: " + utils.mapToString(letterMap=bestSolution._1, cipher=cipher))
     }
-    // Return the most fit solution from the evolution process 
-    generation.maxBy(_._2)
   }
 }

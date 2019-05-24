@@ -2,19 +2,25 @@ import scala.collection.immutable.ListMap
 
 class Initializer() {
 
-  def execute(cipher: String, n_population: Int) = {
+  def execute(cipher: String, nPopulation: Int, wordBag: Map[String, Int]) = {
 
-    val substitute = new Substitute()
+    val utils = new Utils()
     val evaluator = new Evaluator()
 
-    val initial_population = scala.collection.mutable.Map[Map[Char, String], Double]()
+    val initialPopulation = scala.collection.mutable.Map[Map[Char, String], Double]()
 
     // Create the initial parent population
-    for (i <- 1 to n_population) {
-      val letterMap = substitute.execute(cipher)
-      val fitness_score = evaluator.execute(cipher, letterMap)
-      initial_population += (letterMap -> fitness_score)
+    while (initialPopulation.size < nPopulation){
+      val solution = utils.substitute(cipher)
+      val fitnessScore = evaluator.execute(cipher, solution, wordBag)
+      val languageDetectionScore = evaluator.languageDetectionScore(
+        utils.mapToString(letterMap=solution, cipher=cipher)
+      )
+
+      if (languageDetectionScore > 0.0){
+        initialPopulation += (solution -> fitnessScore)
+      }
     }
-    initial_population
+    initialPopulation
   }
 }

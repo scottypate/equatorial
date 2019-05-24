@@ -1,46 +1,57 @@
 import scala.collection.immutable.ListMap
+import java.io.File
+import scala.collection.mutable.StringBuilder
 
 object Main {
     
   def main(args: Array[String]) {
-    val getter = new Getter()
+
+    val utils = new Utils()
     val intializer = new Initializer()
     val evolver = new Evolver()
     val evaluator = new Evaluator()
-    val sampler = new Sampler()
-    val substitute = new Substitute()
 
-    val cipher408 = getter.execute(
-      appDir = System.getProperty("user.dir"),
-      filename = "zodiac_408.txt"
+    val appDir = System.getProperty("user.dir")
+
+    val cipher408 = utils.getFile(
+      dir=appDir, filename="/data/ciphers/zodiac_408.txt"
     )
 
-    val cipher340 = getter.execute(
-      appDir = System.getProperty("user.dir"),
-      filename = "zodiac_340.txt"
+    val cipher340 = utils.getFile(
+      dir=appDir, filename="/data/ciphers/zodiac_340.txt"
     )
 
-    val cipher408Solution = getter.execute(
-      appDir = System.getProperty("user.dir"),
-      filename = "zodiac_408_solution.txt"
+    val cipher408Solution = utils.getFile(
+      dir=appDir, filename="/data/ciphers/zodiac_408_solution.txt"
     )
+
+    var allLetters = new StringBuilder()
+    val files = utils.getListOfFiles(appDir + "/data/letters/")
+    for (file <- files) {
+      allLetters.append(utils.getFile(filename=file.toString()))
+    }
+
+    // Remove all punctuation, https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
+    val cleanedLetters = allLetters.toString.replaceAll("""[\p{Punct}&&[^.]]""", " ")
+    val wordBag = utils.createWordBag(cleanedLetters)
     
-    val cipher408fitness = evaluator.score_solution(cipher408Solution)
+    // This gives some idea of what the fitness score looks like for a solved cipher
+    val cipher408fitness = evaluator.score_solution(cipher408Solution, wordBag)
     println("The fitness score for the 408 solution is: " + cipher408fitness)
 
     val initial_population = intializer.execute(
-      cipher = cipher340,
-      n_population = 10
+      cipher=cipher340,
+      nPopulation=40000,
+      wordBag=wordBag
     )
-    val cdf = sampler.execute(initial_population)
+    val cdf = utils.sample(initial_population)
 
-    val best_solution = evolver.execute(
-      initial_population = initial_population,
-      n_generations = 1, 
-      n_children = initial_population.size,
-      cipher = cipher340
+    evolver.execute(
+      initialPopulation=initial_population,
+      nGenerations=100, 
+      nChildren=initial_population.size,
+      cipher=cipher340,
+      wordBag=wordBag
     )
-    println("The best solution found at the end of evolution is:")
-    println(substitute.map_to_string(letterMap=best_solution._1, cipher=cipher340))
   }
 }

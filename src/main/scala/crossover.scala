@@ -6,7 +6,7 @@ class Crossover(){
   val random = new Random()
 
   // Select a weighted sample from the population for a parent based on the fitness score of the solution
-  def get_parent(population: scala.collection.mutable.Map[Map[Char, String], Double]) = {
+  def getParent(population: scala.collection.mutable.Map[Map[Char, String], Double]) = {
     val keys = population.keySet
     val parent = keys.toVector(random.nextInt(keys.size))
     
@@ -43,10 +43,10 @@ class Crossover(){
     childSolution
   }
   def execute(cipher: String, population: scala.collection.mutable.Map[Map[Char, String], Double]) = {
-    val parentA = get_parent(population)
-    val parentB = get_parent(population)
+    val parentA = getParent(population)
+    val parentB = getParent(population)
     val childSolution = crossover(parentA, parentB, cipher)
-    val mutatedSolution = mutate(childSolution, 0.05)
+    val mutatedSolution = mutate(childSolution, 0.15)
 
     mutatedSolution.toMap
   }
