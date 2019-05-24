@@ -41,16 +41,22 @@ object Main {
     val cipher408fitness = evaluator.score_solution(cipher408Solution, wordBag)
     println("The fitness score for the 408 solution is: " + cipher408fitness)
 
+    print("How many members of the initial population?  ")
+    val nPopulation = scala.io.StdIn.readInt()
+
+    print("How many generations to evolve?  ")
+    val nGenerations = scala.io.StdIn.readInt()
+
     val initial_population = intializer.execute(
       cipher=cipher340,
-      nPopulation=40000,
+      nPopulation=nPopulation,
       wordBag=wordBag
     )
     val cdf = utils.sample(initial_population)
 
     evolver.execute(
       initialPopulation=initial_population,
-      nGenerations=100, 
+      nGenerations=nGenerations, 
       nChildren=initial_population.size,
       cipher=cipher340,
       wordBag=wordBag
