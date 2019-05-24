@@ -1,3 +1,5 @@
+package com.scottypate.equatorial
+
 import scala.util.Random
 import scala.collection.mutable.ListBuffer
 

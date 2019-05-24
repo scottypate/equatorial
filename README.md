@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/scottypate/equatorial/tree/master.svg?style=svg)](https://circleci.com/gh/scottypate/equatorial/tree/master)
-
 # Equatorial
+
+[![CircleCI](https://circleci.com/gh/scottypate/equatorial/tree/master.svg?style=flat-square&label=CircleCI)](https://circleci.com/gh/scottypate/equatorial/tree/master)
 
 ### Genetic Search algorithm for solving Zodiac 340 cipher
 

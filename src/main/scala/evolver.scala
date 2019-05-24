@@ -1,3 +1,5 @@
+package com.scottypate.equatorial
+
 class Evolver() {
 
   def execute(

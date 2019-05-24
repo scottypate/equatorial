@@ -1,3 +1,5 @@
+package com.scottypate.equatorial
+
 import scala.collection.immutable.ListMap
 import java.io.File
 import scala.collection.mutable.StringBuilder

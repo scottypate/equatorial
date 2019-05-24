@@ -1,3 +1,5 @@
+package com.scottypate.equatorial
+
 import scala.collection.immutable.ListMap
 
 class Initializer() {

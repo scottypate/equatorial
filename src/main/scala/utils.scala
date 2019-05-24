@@ -1,3 +1,5 @@
+package com.scottypate.equatorial
+
 import scala.util.Random
 import scala.io.Source
 import java.io.File

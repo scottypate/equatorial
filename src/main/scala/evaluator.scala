@@ -1,6 +1,8 @@
+package com.scottypate.equatorial
+
 import scala.math._
 import org.apache.tika.langdetect.OptimaizeLangDetector
-import collection.JavaConverters._
+import scala.collection.JavaConverters._
 
 // This class contains various methods for evaluating the solution's fitness
 class Evaluator(){
