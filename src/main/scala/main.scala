@@ -5,7 +5,7 @@ import java.io.File
 import scala.collection.mutable.StringBuilder
 
 object Main {
-    
+
   def main(args: Array[String]) {
 
     val utils = new Utils()
