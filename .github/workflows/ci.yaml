@@ -1,0 +1,11 @@
+name: Equatorial CI
+on: push
+
+jobs:
+  run-ci:
+    name: Execute CI
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      
