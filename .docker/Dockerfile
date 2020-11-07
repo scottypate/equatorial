@@ -2,8 +2,8 @@
 FROM openjdk:11.0.2
 
 # Env variables
-ENV SCALA_VERSION 2.12.8
-ENV SBT_VERSION 1.2.8
+ENV SCALA_VERSION 2.13.0
+ENV SBT_VERSION 1.3.0
 
 # Install Scala
 ## Piping curl directly in tar
@@ -30,4 +30,4 @@ RUN \
 ADD . /equatorial
 WORKDIR /equatorial
 
-ENTRYPOINT ["sbt", "run"]
+ENTRYPOINT ["sbt"]
