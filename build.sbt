@@ -1,7 +1,7 @@
 name := "equatorial"
 version := "0.0.1"
-scalaVersion := "2.12.6"
-sbtVersion := "1.2.8"
+scalaVersion := "2.13.0"
+sbtVersion := "1.3.0"
 
 libraryDependencies ++= Seq(
   "org.scalactic"      % "scalactic_2.13.0-RC2" % "3.1.0-SNAP11" % "test",
