@@ -11,3 +11,9 @@ jobs:
 
     - name: Build Environment
       run: docker-compose build
+
+    - name: Compile Code
+      run: docker run scottypate/equatorial compile
+    
+    - name: Run Unit Tests
+      run: docker run scottypate/equatorial test:compile
