@@ -1,6 +1,6 @@
 # Equatorial
 
-[![CircleCI](https://img.shields.io/circleci/build/gh/scottypate/equatorial.svg?style=flat-square&label=CircleCI)](https://circleci.com/gh/scottypate/equatorial/tree/master)
+![](https://github.com/<OWNER>/<REPOSITORY>/workflows/Equatorial%20CI/badge.svg)
 
 ### Genetic Search algorithm for solving Zodiac 340 cipher
 
