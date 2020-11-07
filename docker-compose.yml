@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+
+  analyzer:
+    image: scottypate/equatorial:latest
+    container_name: equatorial
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    command: "\"run 1000 10000\""

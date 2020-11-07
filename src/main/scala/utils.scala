@@ -47,7 +47,7 @@ class Utils() {
   }
 
   def createWordBag(text: String): Map[String, Int] = {
-  	text.split(" ").map(_.toLowerCase).groupBy(identity).mapValues(_.size)
+  	text.split(" ").map(_.toLowerCase).groupBy(identity).mapValues(_.size).toMap
   }
 
   def getListOfFiles(dir: String): List[File] = {

@@ -23,6 +23,10 @@ object Main {
       dir=appDir, filename="/data/ciphers/zodiac_340.txt"
     )
 
+    val testCipher = utils.getFile(
+      dir=appDir, filename="/data/ciphers/test.txt"
+    )
+
     val cipher408Solution = utils.getFile(
       dir=appDir, filename="/data/ciphers/zodiac_408_solution.txt"
     )
@@ -40,25 +44,23 @@ object Main {
     // This gives some idea of what the fitness score looks like for a solved cipher
     val cipher408fitness = evaluator.score_solution(cipher408Solution, wordBag)
     println("The fitness score for the 408 solution is: " + cipher408fitness)
-
-    print("How many members of the initial population?  ")
-    val nPopulation = scala.io.StdIn.readInt()
-
-    print("How many generations to evolve?  ")
-    val nGenerations = scala.io.StdIn.readInt()
+    println(args.length)
+    val nPopulation = args(0).toInt
+    val nGenerations = args(1).toInt
 
     val initial_population = intializer.execute(
-      cipher=cipher340,
+      cipher=testCipher,
       nPopulation=nPopulation,
       wordBag=wordBag
     )
     val cdf = utils.sample(initial_population)
 
+    println("Running the evolution for " + nPopulation + " populations and " + nGenerations + " generations.")
     evolver.execute(
       initialPopulation=initial_population,
       nGenerations=nGenerations, 
       nChildren=initial_population.size,
-      cipher=cipher340,
+      cipher=testCipher,
       wordBag=wordBag
     )
   }
