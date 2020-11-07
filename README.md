@@ -1,6 +1,6 @@
 # Equatorial
 
-![](https://github.com/<OWNER>/<REPOSITORY>/workflows/Equatorial%20CI/badge.svg)
+![](https://github.com/scottypate/equatorial/workflows/Equatorial%20CI/badge.svg)
 
 ### Genetic Search algorithm for solving Zodiac 340 cipher
 
