@@ -14,6 +14,8 @@ class Evolver() {
     val utils = new Utils()
 
     var generation = initialPopulation
+    var solutions = Array[String]()
+    var nAttempts = nChildren
 
     for (i <- 1 to nGenerations) {
       // Create offspring from the initial population
@@ -21,13 +23,18 @@ class Evolver() {
       // Get CDF of fitness values from the current population
       val sampleWeights = utils.sample(generation)
       
-      for (i <- 1 to nChildren) {
-        val child = crossover.execute(cipher, generation)
-        val fitnessScore =  evaluator.execute(cipher, child, wordBag)
-        offspring += (child -> fitnessScore)
+      for (i <- 1 to nAttempts) {
+        val childMap = crossover.execute(cipher, generation)
+        val childString = utils.mapToString(letterMap=childMap, cipher=cipher)
+        val fitnessScore =  evaluator.execute(cipher, childMap, wordBag)
+        if (!(solutions contains childString)) {
+          offspring += (childMap -> fitnessScore)
+          nAttempts += 1
+        }
       }
       generation = utils.blendGeneration(generation, offspring)
       val bestSolution = generation.maxBy(_._2)
+      solutions :+ bestSolution
       println("The best score for generation " + i + " is: " + bestSolution._2)
       println("Solution: " + utils.mapToString(letterMap=bestSolution._1, cipher=cipher))
     }
