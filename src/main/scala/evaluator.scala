@@ -5,7 +5,7 @@ import org.apache.tika.langdetect.OptimaizeLangDetector
 import scala.collection.JavaConverters._
 
 // This class contains various methods for evaluating the solution's fitness
-class Evaluator(){
+class Evaluator() {
 
   val language = new OptimaizeLangDetector()
   val utils = new Utils()
@@ -26,15 +26,19 @@ class Evaluator(){
 
     var score = 0.0
 
-    for ((k,v) <- wordBag){
-      if (solution.contains(k)){
+    for ((k, v) <- wordBag) {
+      if (solution.contains(k)) {
         score += 1 * exp(k.length.toDouble)
       }
     }
     score
   }
 
-  def execute(cipher: String, letterMap: Map[Char, String], wordBag: Map[String, Int]) = {
+  def execute(
+      cipher: String,
+      letterMap: Map[Char, String],
+      wordBag: Map[String, Int]
+  ) = {
     var solution = utils.mapToString(letterMap, cipher)
     score_solution(solution, wordBag)
   }

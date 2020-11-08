@@ -2,5 +2,6 @@
 .idea
 *.env
 target/
-project/
+project/target
+project/project
 *langdetect.lingo24.properties

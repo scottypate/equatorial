@@ -10,7 +10,7 @@ The app will prompt you to input the number of solutions generated in the initia
 
 This application can be run locally or through the provided docker container. Since the app depends on user input, the docker command to run it is
 
-`docker run -it <tag_name>`
+`docker-compose up`
 
 # License
 
