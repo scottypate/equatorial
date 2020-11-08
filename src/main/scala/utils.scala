@@ -7,11 +7,11 @@ import scala.collection.mutable.ListMap
 
 class Utils() {
 
-	def mapToString(letterMap: Map[Char, String], cipher: String) = {
-    
+  def mapToString(letterMap: Map[Char, String], cipher: String) = {
+
     var solution = cipher
 
-    for ((k,v) <- letterMap){
+    for ((k, v) <- letterMap) {
       solution = solution.replace(k, v.charAt(0))
     }
     solution
@@ -19,22 +19,29 @@ class Utils() {
 
   def substitute(cipher: String) = {
 
-	  val cipherList = cipher.toList.distinct
-	  var letters = for (i <- 1 to cipherList.length) yield Random.alphanumeric.filter(_.isLetter).head.toString.toLowerCase
-	  val letterMap = (cipherList zip letters).toMap
+    var letterCorpus = "abbccddeeffgghiijkllmmnnooppqrrssttuvwxyz".toCharArray() 
 
-	  letterMap
+    val cipherList = cipher.toList.distinct
+
+    var letters =
+      for (i <- 1 to cipherList.length)
+        yield letterCorpus(Random.nextInt(letterCorpus.length - 1)).toString
+    val letterMap = (cipherList zip letters).toMap
+    println(letterMap)
+    letterMap
   }
 
-  def sample(observations: scala.collection.mutable.Map[Map[Char, String], Double]) = {
-  	val random = new Random()
+  def sample(
+      observations: scala.collection.mutable.Map[Map[Char, String], Double]
+  ) = {
+    val random = new Random()
     var cdf = scala.collection.mutable.Map[Double, Double]()
     var runningSum: Double = 0.0
 
-    var totalWeight: Double = observations.foldLeft(0.0)(_+_._2)
+    var totalWeight: Double = observations.foldLeft(0.0)(_ + _._2)
     val scores: List[Double] = observations.values.toList.sorted
-    
-    for (score <- scores){ 
+
+    for (score <- scores) {
       runningSum += (score / totalWeight)
       cdf += (score -> runningSum)
     }
@@ -47,7 +54,7 @@ class Utils() {
   }
 
   def createWordBag(text: String): Map[String, Int] = {
-  	text.split(" ").map(_.toLowerCase).groupBy(identity).mapValues(_.size).toMap
+    text.split(" ").map(_.toLowerCase).groupBy(identity).mapValues(_.size).toMap
   }
 
   def getListOfFiles(dir: String): List[File] = {
@@ -56,8 +63,8 @@ class Utils() {
   }
 
   def blendGeneration(
-    offspring: scala.collection.mutable.Map[Map[Char, String], Double], 
-    parents: scala.collection.mutable.Map[Map[Char, String], Double]
+      offspring: scala.collection.mutable.Map[Map[Char, String], Double],
+      parents: scala.collection.mutable.Map[Map[Char, String], Double]
   ) = {
 
     val orderedParents = parents.toSeq.sortWith(_._2 > _._2)
@@ -65,8 +72,12 @@ class Utils() {
 
     val parentSize = orderedParents.size
 
-    var blendedGeneration = ListMap((orderedParents.take(parentSize / 2) ++ orderedOffspring.take(parentSize / 2)):_*)
-    
+    var blendedGeneration = ListMap(
+      (orderedParents.take(parentSize / 2) ++ orderedOffspring.take(
+        parentSize / 2
+      )): _*
+    )
+
     blendedGeneration
   }
 }
