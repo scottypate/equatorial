@@ -4,7 +4,8 @@ FROM openjdk:11.0.2
 # Env variables
 ENV SCALA_VERSION=2.13.0
 ENV SBT_VERSION=1.3.0
-ENV JAVAOPTS="-Xms6g -Xmx15g"
+
+RUN export JAVA_OPTS="-Xms6g -Xmx15g"
 
 # Install Scala
 ## Piping curl directly in tar
