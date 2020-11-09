@@ -16,18 +16,14 @@ class Initializer() {
 
     val initialPopulation =
       scala.collection.mutable.Map[Map[Char, String], Double]()
-
     // Create the initial parent population
-    while (initialPopulation.size < nPopulation) {
+    var iter = 0
+    for (i <- 1 to nPopulation) {
       val solution = utils.substitute(cipher, proportionMap)
       val fitnessScore = evaluator.execute(cipher, solution, wordBag)
-      val languageDetectionScore = evaluator.languageDetectionScore(
-        utils.mapToString(letterMap = solution, cipher = cipher)
-      )
-
-      if (languageDetectionScore > 0.0) {
-        initialPopulation += (solution -> fitnessScore)
-      }
+      initialPopulation += (solution -> fitnessScore)
+      println(iter)
+      iter += 1
     }
     initialPopulation
   }
