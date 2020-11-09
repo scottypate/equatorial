@@ -1,9 +1,11 @@
 package com.scottypate.equatorial
 
 import scala.util.Random
+import scala.math._
 import scala.io.Source
 import java.io.File
 import scala.collection.mutable.ListMap
+import scala.collection.mutable.ArrayBuffer
 
 class Utils() {
 
@@ -17,17 +19,47 @@ class Utils() {
     solution
   }
 
-  def substitute(cipher: String) = {
+  // The frequencyMap method returns a map of english letters and the proportion
+  // by which they occur in the given cipher.
+  def proportionMap(
+      letters: String,
+      cipher: String
+  ): scala.collection.mutable.Map[Char, Int] = {
+    var cleanedLetters: String = letters.replaceAll("[^a-zA-Z]", "")
+    var frequencyMap = scala.collection.mutable.Map.empty[Char, Int]
+    val cipherCharacters = cipher.distinct.length
 
-    var letterCorpus = "abbccddeeffgghiijkllmmnnooppqrrssttuvwxyz".toCharArray() 
+    for (character <- cleanedLetters) {
+      if (frequencyMap.contains(character))
+        frequencyMap(character) = frequencyMap(character) + 1
+      else
+        frequencyMap.+=((character, 1))
+    }
+    val proportionMap = frequencyMap.map(kv =>
+      (kv._1, math.ceil((kv._2.toFloat / cleanedLetters.length) * cipherCharacters).toInt)
+    )
+    proportionMap
+  }
 
+  // The substitute method replaces values in the given cipher with english letters
+  // from the given proportionMap.
+  def substitute(
+      cipher: String,
+      proportionMap: scala.collection.mutable.Map[Char, Int]
+  ) = {
+    var proportionalAlphabet = ArrayBuffer[Char]()
+    for ((k,v) <- proportionMap){
+      proportionalAlphabet = proportionalAlphabet ++ (k.toString * v).toArray
+    }
     val cipherList = cipher.toList.distinct
-
     var letters =
-      for (i <- 1 to cipherList.length)
-        yield letterCorpus(Random.nextInt(letterCorpus.length - 1)).toString
+      for (i <- 1 to cipherList.length) yield {
+        val randomIndex = Random.nextInt(proportionalAlphabet.length)
+        val randomLetter = proportionalAlphabet(randomIndex)
+        proportionalAlphabet.remove(randomIndex)
+        randomLetter.toString
+      }
     val letterMap = (cipherList zip letters).toMap
-    println(letterMap)
     letterMap
   }
 

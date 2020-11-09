@@ -36,6 +36,7 @@ object Main {
     )
 
     var allLetters = new StringBuilder()
+
     val files = utils.getListOfFiles(appDir + "/data/letters/")
     for (file <- files) {
       allLetters.append(utils.getFile(filename = file.toString()))
@@ -44,20 +45,21 @@ object Main {
     // Remove all punctuation, https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
     val cleanedLetters =
       allLetters.toString.replaceAll("""[\p{Punct}&&[^.]]""", " ")
-    
+
+    val proportionMap = utils.proportionMap(cleanedLetters, cipher340)
     val wordBag = utils.createWordBag(cleanedLetters)
 
     // This gives some idea of what the fitness score looks like for a solved cipher
     val cipher408fitness = evaluator.score_solution(cipher408Solution, wordBag)
     println("The fitness score for the 408 solution is: " + cipher408fitness)
-    println(args.length)
     val nPopulation = args(0).toInt
     val nGenerations = args(1).toInt
 
     val initial_population = intializer.execute(
-      cipher = testCipher,
+      cipher = cipher340,
       nPopulation = nPopulation,
-      wordBag = wordBag
+      wordBag = wordBag,
+      proportionMap = proportionMap
     )
     val cdf = utils.sample(initial_population)
 
@@ -68,7 +70,7 @@ object Main {
       initialPopulation = initial_population,
       nGenerations = nGenerations,
       nChildren = initial_population.size,
-      cipher = testCipher,
+      cipher = cipher340,
       wordBag = wordBag
     )
   }
