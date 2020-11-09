@@ -26,11 +26,9 @@ class Evolver() {
       val offspring = scala.collection.mutable.Map[Map[Char, String], Double]()
       // Get CDF of fitness values from the current population
       val sampleWeights = utils.sample(generation)
-
+      var iter = 0
       for (i <- 1 to nAttempts) {
         val childMap = crossover.execute(cipher, generation)
-        val childString =
-          utils.mapToString(letterMap = childMap, cipher = cipher)
         val fitnessScore = evaluator.execute(cipher, childMap, wordBag)
         offspring += (childMap -> fitnessScore)
       }

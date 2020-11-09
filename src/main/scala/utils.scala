@@ -36,7 +36,12 @@ class Utils() {
         frequencyMap.+=((character, 1))
     }
     val proportionMap = frequencyMap.map(kv =>
-      (kv._1, math.ceil((kv._2.toFloat / cleanedLetters.length) * cipherCharacters).toInt)
+      (
+        kv._1,
+        math
+          .ceil((kv._2.toFloat / cleanedLetters.length) * cipherCharacters)
+          .toInt
+      )
     )
     proportionMap
   }
@@ -48,7 +53,7 @@ class Utils() {
       proportionMap: scala.collection.mutable.Map[Char, Int]
   ) = {
     var proportionalAlphabet = ArrayBuffer[Char]()
-    for ((k,v) <- proportionMap){
+    for ((k, v) <- proportionMap) {
       proportionalAlphabet = proportionalAlphabet ++ (k.toString * v).toArray
     }
     val cipherList = cipher.toList.distinct

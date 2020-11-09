@@ -25,7 +25,6 @@ class Crossover() {
   ) = {
     val cipherList = cipher.toList.distinct
     var partialSolution = scala.collection.mutable.Map[Char, String]()
-
     for (letter <- cipherList) {
       val randomInt = random.nextInt(2)
 
@@ -43,13 +42,14 @@ class Crossover() {
       childSolution: scala.collection.mutable.Map[Char, String],
       mutationProbability: Double
   ) = {
-    for (letter <- childSolution) {
-      val randomDouble = random.nextDouble()
-      if (randomDouble <= mutationProbability) {
-        val randomMutation =
-          Random.alphanumeric.filter(_.isLetter).head.toString.toLowerCase
-        childSolution.put(letter._1, randomMutation)
-      }
+    val randomDouble = random.nextDouble()
+    val randomIndex = random.nextInt(childSolution.size)
+    if (randomDouble <= mutationProbability) {
+      val randomMutation =
+        Random.alphanumeric.filter(_.isLetter).head.toString.toLowerCase
+      val randomKey =
+        childSolution.get(childSolution.keySet.toVector(randomIndex)).toString
+      childSolution.put(randomKey(0), randomMutation)
     }
     childSolution
   }
@@ -60,7 +60,7 @@ class Crossover() {
     val parentA = getParent(population)
     val parentB = getParent(population)
     val childSolution = crossover(parentA, parentB, cipher)
-    val mutatedSolution = mutate(childSolution, 0.4)
+    val mutatedSolution = mutate(childSolution, 0.25)
 
     mutatedSolution.toMap
   }
