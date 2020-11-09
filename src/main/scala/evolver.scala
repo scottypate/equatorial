@@ -3,11 +3,15 @@ package com.scottypate.equatorial
 class Evolver() {
 
   def execute(
-    initialPopulation: scala.collection.mutable.Map[Map[Char, String], Double], 
-    nGenerations: Int, 
-    nChildren: Int,
-    cipher: String,
-    wordBag: Map[String, Int] ) = {
+      initialPopulation: scala.collection.mutable.Map[Map[
+        Char,
+        String
+      ], Double],
+      nGenerations: Int,
+      nChildren: Int,
+      cipher: String,
+      wordBag: Map[String, Int]
+  ) = {
 
     val crossover = new Crossover()
     val evaluator = new Evaluator()
@@ -22,21 +26,24 @@ class Evolver() {
       val offspring = scala.collection.mutable.Map[Map[Char, String], Double]()
       // Get CDF of fitness values from the current population
       val sampleWeights = utils.sample(generation)
-      
+
       for (i <- 1 to nAttempts) {
         val childMap = crossover.execute(cipher, generation)
-        val childString = utils.mapToString(letterMap=childMap, cipher=cipher)
-        val fitnessScore =  evaluator.execute(cipher, childMap, wordBag)
-        if (!(solutions contains childString)) {
-          offspring += (childMap -> fitnessScore)
-          nAttempts += 1
-        }
+        val childString =
+          utils.mapToString(letterMap = childMap, cipher = cipher)
+        val fitnessScore = evaluator.execute(cipher, childMap, wordBag)
+        offspring += (childMap -> fitnessScore)
       }
       generation = utils.blendGeneration(generation, offspring)
       val bestSolution = generation.maxBy(_._2)
       solutions :+ bestSolution
       println("The best score for generation " + i + " is: " + bestSolution._2)
-      println("Solution: " + utils.mapToString(letterMap=bestSolution._1, cipher=cipher))
+      println(
+        "Solution: " + utils.mapToString(
+          letterMap = bestSolution._1,
+          cipher = cipher
+        )
+      )
     }
   }
 }

@@ -1,6 +1,6 @@
 # Equatorial
 
-[![CircleCI](https://img.shields.io/circleci/build/gh/scottypate/equatorial.svg?style=flat-square&label=CircleCI)](https://circleci.com/gh/scottypate/equatorial/tree/master)
+![](https://github.com/scottypate/equatorial/workflows/Equatorial%20CI/badge.svg)
 
 ### Genetic Search algorithm for solving Zodiac 340 cipher
 
@@ -10,7 +10,7 @@ The app will prompt you to input the number of solutions generated in the initia
 
 This application can be run locally or through the provided docker container. Since the app depends on user input, the docker command to run it is
 
-`docker run -it <tag_name>`
+`docker-compose up`
 
 # License
 
