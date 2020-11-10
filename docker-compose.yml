@@ -9,8 +9,6 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
     command: "\"run 50000 10000\""
-    environment:
-      - JAVA_OPTS="-Xms6g -Xmx15g"
     volumes:
       - type: bind
         source: ./src/main/scala

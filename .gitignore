@@ -5,3 +5,6 @@ target/
 project/target
 project/project
 *langdetect.lingo24.properties
+terraform.tfstate*
+*.tfvars
+.terraform.tfstate.lock.info
