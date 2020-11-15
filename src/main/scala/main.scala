@@ -53,11 +53,8 @@ object Main {
     val cipher408fitness = evaluator.score_solution(cipher408Solution, wordBag)
     println("The fitness score for the 408 solution is: " + cipher408fitness)
 
-    print("How many members of the initial population?  ")
-    val nPopulation = scala.io.StdIn.readInt()
-
-    print("How many generations to evolve?  ")
-    val nGenerations = scala.io.StdIn.readInt()
+    val nPopulation = 30000
+    val nGenerations = 50000
 
     val initial_population = intializer.execute(
       cipher = cipher340,
