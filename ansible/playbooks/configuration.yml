@@ -1,0 +1,9 @@
+---
+- hosts: "_equatorial"
+  remote_user: ec2-user
+  tasks:
+    - name: Test SSH Access
+      command: echo "Alive"
+      register: test 
+
+    - debug: msg="{{ test.stdout }}"

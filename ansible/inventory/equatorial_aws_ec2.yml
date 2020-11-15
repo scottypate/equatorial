@@ -1,0 +1,11 @@
+plugin: amazon.aws.aws_ec2
+
+regions:
+  - us-east-1
+
+keyed_groups:
+  # add hosts to tag_Name_value groups for each aws_ec2 host's tags.Name variable
+  - key: tags.service
+
+compose:
+  ansible_host: public_ip_address

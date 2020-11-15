@@ -75,7 +75,8 @@ object Main {
       nGenerations = nGenerations,
       nChildren = initial_population.size,
       cipher = cipher340,
-      wordBag = wordBag
+      wordBag = wordBag,
+      proportionMap = proportionMap
     )
   }
 }

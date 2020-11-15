@@ -2,6 +2,7 @@ package com.scottypate.equatorial
 
 class Evolver() {
 
+  val initializer = new Initializer()
   def execute(
       initialPopulation: scala.collection.mutable.Map[Map[
         Char,
@@ -10,7 +11,8 @@ class Evolver() {
       nGenerations: Int,
       nChildren: Int,
       cipher: String,
-      wordBag: Map[String, Int]
+      wordBag: Map[String, Int],
+      proportionMap: scala.collection.mutable.Map[Char, Int]
   ) = {
 
     val crossover = new Crossover()
@@ -32,7 +34,14 @@ class Evolver() {
         val fitnessScore = evaluator.execute(cipher, childMap, wordBag)
         offspring += (childMap -> fitnessScore)
       }
-      generation = utils.blendGeneration(generation, offspring)
+      var newSolutions = initializer.execute(
+        cipher = cipher,
+        nPopulation = nChildren / 2,
+        wordBag = wordBag,
+        proportionMap = proportionMap
+      )
+      generation = utils.blendGeneration(generation, offspring, newSolutions)
+      println(generation.size)
       val bestSolution = generation.maxBy(_._2)
       solutions :+ bestSolution
       println("The best score for generation " + i + " is: " + bestSolution._2)

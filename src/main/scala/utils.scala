@@ -101,13 +101,14 @@ class Utils() {
 
   def blendGeneration(
       offspring: scala.collection.mutable.Map[Map[Char, String], Double],
-      parents: scala.collection.mutable.Map[Map[Char, String], Double]
+      parents: scala.collection.mutable.Map[Map[Char, String], Double],
+      newSolutions: scala.collection.mutable.Map[Map[Char, String], Double]
   ) = {
 
     val orderedParents = parents.toSeq.sortWith(_._2 > _._2)
     val orderedOffspring = offspring.toSeq.sortWith(_._2 > _._2)
 
-    val parentSize = orderedParents.size
+    val parentSize = orderedParents.size / 2
 
     var blendedGeneration = ListMap(
       (orderedParents.take(parentSize / 2) ++ orderedOffspring.take(
@@ -115,6 +116,6 @@ class Utils() {
       )): _*
     )
 
-    blendedGeneration
+    blendedGeneration ++ newSolutions
   }
 }

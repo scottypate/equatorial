@@ -33,7 +33,7 @@ resource "aws_instance" "equatorial" {
   ami           = data.aws_ami.amazon-linux-2.id
   vpc_security_group_ids = [aws_security_group.ssh-ec2.id]
   instance_type = "c5.2xlarge"
-
+  key_name = "personal"
   tags = {
     Name = "equatorial"
     service = "equatorial"
