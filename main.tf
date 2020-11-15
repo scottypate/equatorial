@@ -23,6 +23,13 @@ resource "aws_security_group" "ssh-ec2" {
     cidr_blocks = var.ssh-ingress
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "ssh-ec2"
     service = "equatorial"
@@ -38,4 +45,8 @@ resource "aws_instance" "equatorial" {
     Name = "equatorial"
     service = "equatorial"
   }
+}
+
+output "public_ip" {
+  value = aws_instance.equatorial.public_ip
 }

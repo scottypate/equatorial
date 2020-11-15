@@ -51,6 +51,7 @@ class Evolver() {
           cipher = cipher
         )
       )
+      println("Letter map is: " + bestSolution._1)
     }
   }
 }

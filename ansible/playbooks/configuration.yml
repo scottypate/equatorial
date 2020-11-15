@@ -2,8 +2,43 @@
 - hosts: "_equatorial"
   remote_user: ec2-user
   tasks:
-    - name: Test SSH Access
-      command: echo "Alive"
-      register: test 
+    - name: Install Amazon Extras 
+      command: amazon-linux-extras install -y docker epel
+      become: yes
+      become_user: root
 
-    - debug: msg="{{ test.stdout }}"
+    - name: Install Git
+      yum: 
+        name:
+          - git
+        state: latest
+      become: yes
+      become_user: root
+
+    - name: Start Docker Service
+      service:
+        name: docker
+        state: started
+      become: yes
+      become_user: root
+
+    - name: Add Default User to Docker User Group
+      command: usermod -a -G docker ec2-user
+      become: yes
+      become_user: root
+
+    - name: Install Docker Compose
+      shell: |
+        curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
+        chmod +x /usr/local/bin/docker-compose
+        ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
+      args:
+        warn: false
+      become: yes
+      become_user: root
+
+    - name: Clone GitHub Repository
+      git: 
+        repo: 'https://github.com/scottypate/equatorial'
+        dest: /home/ec2-user/equatorial
+        version: "HEAD"
